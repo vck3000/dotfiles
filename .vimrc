@@ -44,11 +44,20 @@ Plug 'pandysong/ghost-text.vim' " Linking with the browser ghost text
 " JSX syntax highlighting
 Plug 'maxmellon/vim-jsx-pretty'
 
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
+
+" vim-airline stuff
+" let g:airline_powerline_fonts = 1
+" au BufEnter * :AirlineTheme dark
 
 " Colour schemes
 colorscheme gruvbox
 set background=dark
+" Tmux colours
+set t_Co=256
 
 " Set transparent background
 hi Normal guibg=NONE ctermbg=NONE
