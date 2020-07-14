@@ -42,6 +42,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'pandysong/ghost-text.vim' " Linking with the browser ghost text
 
 " JSX syntax highlighting
+Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 
 " Plug 'vim-airline/vim-airline'
