@@ -25,7 +25,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox' " Color scheme
 Plug 'jremmen/vim-ripgrep' " Fast vim grepping 
 " Plug 'tpope/vim-fugitive' " For git integration - blames, diffs, logs...
-" Plug 'leafgarland/typescript-vim' " Typescript syntax/highlighting
 Plug 'vim-utils/vim-man' " See man pages from within vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy find 
 Plug 'junegunn/fzf.vim'
@@ -41,8 +40,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 Plug 'pandysong/ghost-text.vim' " Linking with the browser ghost text
 
-" JSX syntax highlighting
+" Javascript syntax highlighting
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 
 " Plug 'vim-airline/vim-airline'
@@ -163,7 +163,7 @@ nnoremap <leader>f :Prettier<CR>
 
 " Map Ctrl + P to use FZF search, works for Git projects. Remove G to work
 " normally
-nnoremap <C-p> :Files<Cr>
+nnoremap <C-p> :GFiles<Cr>
 
 " " To scroll up and down the pop ups 
 " nnoremap <expr> <c-d> misc#popup#scroll_cursor_popup123(1) ? '<esc>' : '<c-d>'
