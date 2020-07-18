@@ -45,6 +45,10 @@ Plug 'pandysong/ghost-text.vim' " Linking with the browser ghost text
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 
+" Quality of life
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
@@ -157,7 +161,7 @@ function! s:show_documentation()
 endfunction
 
 " coc.nvim prettier
-" command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 nnoremap <leader>f :Prettier<CR>
 
 
