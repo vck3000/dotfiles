@@ -43,6 +43,7 @@ Plug 'pandysong/ghost-text.vim' " Linking with the browser ghost text
 " Javascript syntax highlighting
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'maxmellon/vim-jsx-pretty'
 
 " Quality of life
@@ -137,6 +138,8 @@ nmap <leader>gn <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart
+" remap to prevent floating windows on C-c
+inoremap <C-c> <Esc><Esc>
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -164,10 +167,19 @@ endfunction
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 nnoremap <leader>f :Prettier<CR>
 
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Map Ctrl + P to use FZF search, works for Git projects. Remove G to work
 " normally
 nnoremap <C-p> :GFiles<Cr>
+
+" leader p to set into paste mode
+nmap <leader>p :setlocal paste! paste?<cr>
 
 " " To scroll up and down the pop ups 
 " nnoremap <expr> <c-d> misc#popup#scroll_cursor_popup123(1) ? '<esc>' : '<c-d>'
