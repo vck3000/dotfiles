@@ -17,6 +17,7 @@ set showcmd " Show what command is being typed out
 set relativenumber
 
 set cmdheight=2
+set laststatus=2
 set updatetime=300
 
 " Plugins
@@ -28,7 +29,6 @@ Plug 'jremmen/vim-ripgrep' " Fast vim grepping
 Plug 'vim-utils/vim-man' " See man pages from within vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy find 
 Plug 'junegunn/fzf.vim'
-" Plug 'ycm-core/YouCompleteMe' " Auto-complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree' " Undo tree...
 
@@ -38,7 +38,7 @@ Plug 'junegunn/limelight.vim' " Dims inactive paragraphs
 Plug 'junegunn/goyo.vim' " Distraction free writing
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
-Plug 'pandysong/ghost-text.vim' " Linking with the browser ghost text
+" Plug 'pandysong/ghost-text.vim' " Linking with the browser ghost text
 
 " Javascript syntax highlighting
 Plug 'pangloss/vim-javascript'
@@ -49,32 +49,31 @@ Plug 'maxmellon/vim-jsx-pretty'
 " Quality of life
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
-
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
 " vim-airline stuff
-" let g:airline_powerline_fonts = 1
-" au BufEnter * :AirlineTheme dark
+let g:airline_powerline_fonts = 1
 
 " Colour schemes
+" set background=dark
 colorscheme gruvbox
-set background=dark
+" Set transparent background
+autocmd VimEnter * hi Normal ctermbg=none
+
 " Tmux colours
 set t_Co=256
 
-" Set transparent background
-hi Normal guibg=NONE ctermbg=NONE
+" Use markdown Github css styles
+let g:mkdp_markdown_css = expand('~.vim/github-markdown.css')
 
 " 80 column marker
 " highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 " match OverLength /\%81v.\+/
 " set colorcolumn=81
 " highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-
 
 " Extra config for plugins
 
@@ -90,23 +89,13 @@ let mapleader = " " " Set leader to space bar
 " let g:netrw_browse_split=2 " Open files in 2nd tab??
 let g:netrw_banner = 0 " turn off top preview?
 let g:netrw_winsize = 25 " Window size about 25%
+let g:netrw_keepdir=0 " Helps with copying files?
 
 " Markdown CSS
 " Open all code folds
 autocmd FileType markdown normal zR 
 autocmd FileType markdown :set wrap
 autocmd FileType markdown :set linebreak
-
-
-" Use markdown Github css styles
-let g:mkdp_markdown_css = expand('~.vim/github-markdown.css')
-
-" Powerline for Vim
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-set laststatus=2
-
 
 " Remaps
 " Jump between windows easily
@@ -121,11 +110,6 @@ nnoremap <leader>pv :20Lex<CR>
 nnoremap <leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>= :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
-
-" YCM remaps 
-" nnoremap <silent> <leader>gd :YcmCompleter GoTo<CR>
-" nnoremap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
-" nnoremap <silent> <leader>rr :YcmCompleter RefactorRename<space>
 
 " coc.nvim remaps
 nmap <leader>gd <Plug>(coc-definition)
@@ -180,37 +164,3 @@ nnoremap <C-p> :GFiles<Cr>
 
 " leader p to set into paste mode
 nmap <leader>p :setlocal paste! paste?<cr>
-
-" " To scroll up and down the pop ups 
-" nnoremap <expr> <c-d> misc#popup#scroll_cursor_popup123(1) ? '<esc>' : '<c-d>'
-" nnoremap <expr> <c-u> misc#popup#scroll_cursor_popup123(0) ? '<esc>' : '<c-u>'
-" 
-" function misc#popup#scroll_cursor_popup123(...)
-"   let radius = get(a:000, 0, 2)
-"   let srow = screenrow()
-"   let scol = screencol()
-" 
-"   " it's necessary to test entire rect, as some popup might be quite small
-"   for r in range(srow - radius, srow + radius)
-"     for c in range(scol - radius, scol + radius)
-"       let winid = popup_locate(r, c)
-"       if winid != 0
-"         return winid
-"       endif
-"     endfor
-"   endfor
-"   return 0
-" endfunction
-" 
-" function misc#popup#scroll_cursor_popup123(down)
-"   let winid = misc#popup#find_cursor_popup123()
-"   if winid == 0
-"     return 0
-"   endif
-" 
-"   let pp = popup_getpos(winid)
-"   call popup_setoptions( winid,
-"           \ {'firstline' : pp.firstline + ( a:down ? 1 : -1 ) } )
-" 
-"   return 1
-" endfunction
