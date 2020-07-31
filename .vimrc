@@ -58,7 +58,7 @@ call plug#end()
 let g:airline_powerline_fonts = 1
 
 " Colour schemes
-" set background=dark
+set background=dark
 colorscheme gruvbox
 " Set transparent background
 autocmd VimEnter * hi Normal ctermbg=none
