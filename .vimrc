@@ -15,6 +15,7 @@ set undofile " Tell vim to keep track of a separate undo file for each file
 set incsearch " Incremental search
 set showcmd " Show what command is being typed out
 set relativenumber
+set hls "highlight search terms
 
 set cmdheight=2
 set laststatus=2
@@ -31,6 +32,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy find
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree' " Undo tree...
+Plug 'tpope/vim-commentary' " Easy comments
 
 " Markdown
 Plug 'plasticboy/vim-markdown' " Markdown syntax
@@ -52,7 +54,16 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" ThePrimeagen
+Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
+
+Plug 'rhysd/vim-clang-format' " C++ auto format
+
+
 call plug#end()
+
+" Clang auto format on save for cpp files
+autocmd FileType cpp :ClangFormatAutoEnable
 
 " vim-airline stuff
 let g:airline_powerline_fonts = 1
@@ -111,6 +122,9 @@ nnoremap <leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>= :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
+" Clear highlighting words after search
+nnoremap <leader>c :noh<CR><C-l>
+
 " coc.nvim remaps
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
@@ -148,8 +162,8 @@ function! s:show_documentation()
 endfunction
 
 " coc.nvim prettier
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-nnoremap <leader>f :Prettier<CR>
+" command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+" nnoremap <leader>f :Prettier<CR>
 
 " Use <c-space> to trigger completion.
 if has('nvim')
