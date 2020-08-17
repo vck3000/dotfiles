@@ -59,11 +59,16 @@ Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
 
 Plug 'rhysd/vim-clang-format' " C++ auto format
 
+" Flutter related stuff
+Plug 'dart-lang/dart-vim-plugin'
 
 call plug#end()
 
-" Clang auto format on save for cpp files
+" Clangd auto format on save for cpp files
 autocmd FileType cpp :ClangFormatAutoEnable
+
+let g:clang_format#style_options = {
+      \ "BreakBeforeBraces": "Stroustrup" }
 
 " vim-airline stuff
 let g:airline_powerline_fonts = 1
@@ -101,6 +106,7 @@ let mapleader = " " " Set leader to space bar
 let g:netrw_banner = 0 " turn off top preview?
 let g:netrw_winsize = 25 " Window size about 25%
 let g:netrw_keepdir=0 " Helps with copying files?
+let g:netrw_browse_split = 4
 
 " Markdown CSS
 " Open all code folds
@@ -123,7 +129,7 @@ nnoremap <silent> <Leader>= :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
 " Clear highlighting words after search
-nnoremap <leader>c :noh<CR><C-l>
+nnoremap <leader>c :noh<CR>
 
 " coc.nvim remaps
 nmap <leader>gd <Plug>(coc-definition)
