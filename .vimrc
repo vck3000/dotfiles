@@ -58,6 +58,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
 
 Plug 'rhysd/vim-clang-format' " C++ auto format
+Plug 'octol/vim-cpp-enhanced-highlight' " Syntax highlighting
 
 " Flutter related stuff
 Plug 'dart-lang/dart-vim-plugin'
