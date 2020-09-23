@@ -16,6 +16,8 @@ set incsearch " Incremental search
 set showcmd " Show what command is being typed out
 set relativenumber
 set hls "highlight search terms
+set encoding=utf8
+
 
 set cmdheight=2
 set laststatus=2
@@ -33,6 +35,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree' " Undo tree...
 Plug 'tpope/vim-commentary' " Easy comments
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 
 " Markdown
 Plug 'plasticboy/vim-markdown' " Markdown syntax
@@ -66,9 +70,10 @@ call plug#end()
 
 " Clangd auto format on save for cpp files
 autocmd FileType cpp :ClangFormatAutoEnable
-
 let g:clang_format#style_options = {
+      \ "BasedOnStyle": "Google",
       \ "BreakBeforeBraces": "Stroustrup" }
+
 
 " vim-airline stuff
 let g:airline_powerline_fonts = 1
@@ -86,10 +91,8 @@ set t_Co=256
 let g:mkdp_markdown_css = expand('~.vim/github-markdown.css')
 
 " 80 column marker
-" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-" match OverLength /\%81v.\+/
-" set colorcolumn=81
-" highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 
 " Extra config for plugins
 
@@ -100,6 +103,9 @@ if executable('rg')
 endif
 
 let mapleader = " " " Set leader to space bar
+
+" Switch between header and source files for c
+nnoremap <leader>a :CocCommand clangd.switchSourceHeader<CR>
 
 " Netrw config
 " let g:netrw_browse_split=2 " Open files in 2nd tab??
@@ -113,6 +119,7 @@ let g:netrw_browse_split = 4
 autocmd FileType markdown normal zR 
 autocmd FileType markdown :set wrap
 autocmd FileType markdown :set linebreak
+autocmd FileType markdown match OverLength /\%9999v.\+/ " Don't show in md files
 
 " Remaps
 " Jump between windows easily
@@ -120,9 +127,7 @@ nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>u :UndotreeShow<CR
-" Open the netrw thing for Project View
-nnoremap <leader>pv :20Lex<CR>
+nnoremap <leader>u :UndotreeShow<CR>
 " Get up ripgrep ready to Project Search
 nnoremap <leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>= :vertical resize +5<CR>
@@ -178,9 +183,11 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Map Ctrl + P to use FZF search, works for Git projects. Remove G to work
-" normally
+" FZF search
 nnoremap <C-p> :GFiles<Cr>
+nnoremap <leader>o :Files<Cr>
+
+nnoremap <leader>pv :NERDTreeToggle<CR>
 
 " leader p to set into paste mode
 nmap <leader>p :setlocal paste! paste?<cr>
