@@ -7,6 +7,7 @@ set expandtab " Expand tabs into spaces
 set smartindent " Try to indent for me
 set nu " Set line numbers
 set nowrap " Don't wrap lines
+set ignorecase " Required for the next command
 set smartcase " Try to do case sensitive searching unless I use uppercase
 set noswapfile " No swap files in the project
 set nobackup " Don't keep backup because of undo directory
@@ -32,7 +33,18 @@ Plug 'jremmen/vim-ripgrep' " Fast vim grepping
 Plug 'vim-utils/vim-man' " See man pages from within vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy find 
 Plug 'junegunn/fzf.vim'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'voldikss/coc-cmake', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+
 Plug 'mbbill/undotree' " Undo tree...
 Plug 'tpope/vim-commentary' " Easy comments
 Plug 'preservim/nerdtree'
@@ -59,7 +71,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " ThePrimeagen
-Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
+Plug 'ThePrimeagen/vim-be-good'
 
 Plug 'rhysd/vim-clang-format' " C++ auto format
 Plug 'octol/vim-cpp-enhanced-highlight' " Syntax highlighting
