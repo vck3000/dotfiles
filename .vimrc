@@ -35,15 +35,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy find
 Plug 'junegunn/fzf.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'voldikss/coc-cmake', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 
 Plug 'mbbill/undotree' " Undo tree...
 Plug 'tpope/vim-commentary' " Easy comments
@@ -80,6 +71,18 @@ Plug 'octol/vim-cpp-enhanced-highlight' " Syntax highlighting
 Plug 'dart-lang/dart-vim-plugin'
 
 call plug#end()
+
+let g:coc_global_extensions = [
+\ 'coc-clangd',
+\ 'coc-cmake', 
+\ 'coc-css',
+\ 'coc-eslint',
+\ 'coc-git', 
+\ 'coc-json',
+\ 'coc-python',
+\ 'coc-tsserver',
+\ 'coc-yaml',
+\ ]
 
 " Clangd auto format on save for cpp files
 autocmd FileType cpp :ClangFormatAutoEnable
