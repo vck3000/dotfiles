@@ -2,8 +2,8 @@ syntax on " Basic highlighting
 
 set noerrorbells " No sound on error
 set tabstop=2 softtabstop=2 " Tabs are 4 spaces long
-set shiftwidth=2 " Shift tabs by 4 spaces
-set expandtab " Expand tabs into spaces
+set shiftwidth=2 " Shift tabs by 4 spaces 
+set expandtab " Expand tabs into spaces 
 set smartindent " Try to indent for me
 set nu " Set line numbers
 set nowrap " Don't wrap lines
@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox' " Color scheme
 Plug 'jremmen/vim-ripgrep' " Fast vim grepping 
-" Plug 'tpope/vim-fugitive' " For git integration - blames, diffs, logs...
+Plug 'tpope/vim-fugitive' " For git integration - blames, diffs, logs...
 Plug 'vim-utils/vim-man' " See man pages from within vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy find 
 Plug 'junegunn/fzf.vim'
@@ -54,6 +54,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'alvan/vim-closetag'
 
 " Quality of life
 Plug 'tpope/vim-surround'
@@ -80,6 +81,7 @@ let g:coc_global_extensions = [
 \ 'coc-git', 
 \ 'coc-json',
 \ 'coc-python',
+\ 'coc-prettier',
 \ 'coc-tsserver',
 \ 'coc-yaml',
 \ ]
@@ -98,7 +100,7 @@ let g:airline_powerline_fonts = 1
 set background=dark
 colorscheme gruvbox
 " Set transparent background
-autocmd VimEnter * hi Normal ctermbg=none
+" autocmd VimEnter * hi Normal ctermbg=none
 
 " Tmux colours
 set t_Co=256
@@ -107,8 +109,8 @@ set t_Co=256
 let g:mkdp_markdown_css = expand('~.vim/github-markdown.css')
 
 " 80 column marker
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+" match OverLength /\%81v.\+/
 
 " Extra config for plugins
 
@@ -144,6 +146,7 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>w :w<CR>
 " Get up ripgrep ready to Project Search
 nnoremap <leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>= :vertical resize +5<CR>
@@ -159,10 +162,11 @@ nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>rr <Plug>(coc-rename)
 nmap <leader>gN <Plug>(coc-diagnostic-prev)
+nmap <leader>gc <Plug>(coc-git-chunkinfo)
 nmap <leader>gn <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <leader>cr :CocRestart
+nnoremap <leader>cr :CocRestart<CR>
 " remap to prevent floating windows on C-c
 inoremap <C-c> <Esc><Esc>
 " Use <c-space> to trigger completion.
@@ -203,7 +207,13 @@ endif
 nnoremap <C-p> :GFiles<Cr>
 nnoremap <leader>o :Files<Cr>
 
+" Nerdtree
 nnoremap <leader>pv :NERDTreeToggle<CR>
 
 " leader p to set into paste mode
 nmap <leader>p :setlocal paste! paste?<cr>
+
+" closetag
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+
