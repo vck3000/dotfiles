@@ -42,10 +42,14 @@ Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 
 " Markdown
+Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown' " Markdown syntax
 Plug 'junegunn/limelight.vim' " Dims inactive paragraphs
 Plug 'junegunn/goyo.vim' " Distraction free writing
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+let g:mkdp_markdown_css = expand('~/.vim/github-markdown.css')
+let g:mkdp_highlight_css = expand('~/.vim/gruvbox-dark.css')
+let g:mkdp_auto_close = 0
 
 " Plug 'pandysong/ghost-text.vim' " Linking with the browser ghost text
 
@@ -105,9 +109,6 @@ colorscheme gruvbox
 " Tmux colours
 set t_Co=256
 
-" Use markdown Github css styles
-let g:mkdp_markdown_css = expand('~.vim/github-markdown.css')
-
 " 80 column marker
 " highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 " match OverLength /\%81v.\+/
@@ -137,7 +138,7 @@ let g:netrw_browse_split = 4
 autocmd FileType markdown normal zR 
 autocmd FileType markdown :set wrap
 autocmd FileType markdown :set linebreak
-autocmd FileType markdown match OverLength /\%9999v.\+/ " Don't show in md files
+" autocmd FileType markdown match OverLength /\%9999v.\+/ " Don't show in md files
 
 " Remaps
 " Jump between windows easily
@@ -162,7 +163,7 @@ nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>rr <Plug>(coc-rename)
 nmap <leader>gN <Plug>(coc-diagnostic-prev)
-nmap <leader>gc <Plug>(coc-git-chunkinfo)
+nmap <leader>gs <Plug>(coc-git-chunkinfo)
 nmap <leader>gn <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
