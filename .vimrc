@@ -152,6 +152,9 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>= :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
+" Inverse relative line number on ctrl + l twice.
+nmap <C-L><C-L> :set invrelativenumber<CR>
+
 
 " Clear highlighting words after search
 nnoremap <leader>c :noh<CR>
@@ -193,10 +196,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-" coc.nvim prettier
-" command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-" nnoremap <leader>f :Prettier<CR>
-
 " Use <c-space> to trigger completion.
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
@@ -210,6 +209,11 @@ nnoremap <leader>o :Files<Cr>
 
 " Nerdtree
 nnoremap <leader>pv :NERDTreeToggle<CR>
+" Open up with current directory at the open buffer/file
+nnoremap <leader>po :NERDTreeToggle %<CR>
+" Open up to the buffer/file
+nnoremap <leader>pf :NERDTreeFind<CR>
+
 
 " leader p to set into paste mode
 nmap <leader>p :setlocal paste! paste?<cr>

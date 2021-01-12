@@ -121,6 +121,34 @@ alias gs="git status"
 alias gdc="git diff --cached"
 
 export FORGE_CLI_PATH=~/Coding/forge
-alias devforge='FORGE_DEV_TUNNEL=true PATH=$FORGE_CLI_PATH/scripts:$PATH node $FORGE_CLI_PATH/packages/forge-cli/out/bin/cli.js'
+# export FORGE_CLI_PATH=~/forge
+# alias devforge='FORGE_DEV_TUNNEL=true PATH=$FORGE_CLI_PATH/scripts:$PATH node $FORGE_CLI_PATH/packages/forge-cli/out/bin/cli.js'
+devforge() {AUTOCOMPLETE_ALIAS=devforge FORGE_DEV_TUNNEL=true PATH=$FORGE_CLI_PATH/scripts:$PATH node $FORGE_CLI_PATH/packages/forge-cli/out/bin/cli.js $@ }
+# _devforge_completion() {FORGE_DEV_TUNNEL=true PATH=$FORGE_CLI_PATH/scripts:$PATH node $FORGE_CLI_PATH/packages/forge-cli/out/bin/cli.js $@ }
+
 alias devforgedocker='FORGE_DEV_DOCKER_TUNNEL=true PATH=$FORGE_CLI_PATH/scripts:$PATH node $FORGE_CLI_PATH/packages/forge-cli/out/bin/cli.js'
 
+export LOCAL_CLI_EXECUTABLE=~/Coding/forge/packages/forge-cli/out/bin/cli.js
+
+# Automatically run `nvm use` when in a directory with it.
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
