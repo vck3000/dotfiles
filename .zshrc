@@ -2,8 +2,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/victor/.oh-my-zsh"
-# export ZSH="/Users/vkuo/.oh-my-zsh"
+# export ZSH="/home/victor/.oh-my-zsh"
+export ZSH="/Users/vkuo/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -153,3 +153,11 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+# begin devforge completion
+. <(devforge --completion)
+# end devforge completion
+
+# begin forge completion
+. <(forge --completion)
+# end forge completion

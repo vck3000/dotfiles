@@ -18,6 +18,10 @@ set showcmd " Show what command is being typed out
 set relativenumber
 set hls "highlight search terms
 set encoding=utf8
+set hidden
+set scrolloff=8
+set sidescrolloff=16
+set completeopt=menuone,noinsert,noselect
 
 
 set cmdheight=2
@@ -104,7 +108,7 @@ let g:airline_powerline_fonts = 1
 set background=dark
 colorscheme gruvbox
 " Set transparent background
-" autocmd VimEnter * hi Normal ctermbg=none
+autocmd VimEnter * hi Normal ctermbg=none
 
 " Tmux colours
 set t_Co=256
@@ -166,7 +170,7 @@ nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>rr <Plug>(coc-rename)
 nmap <leader>gN <Plug>(coc-diagnostic-prev)
-nmap <leader>gs <Plug>(coc-git-chunkinfo)
+nmap <leader>gc <Plug>(coc-git-chunkinfo)
 nmap <leader>gn <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
@@ -202,6 +206,13 @@ if has('nvim')
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
+
+" Vim-fugitive
+nmap <leader>gs :G<CR>
+nmap <leader>gf :diffget //2<CR>
+nmap <leader>gj :diffget //3<CR>
+" Vertical split for gdiff
+set diffopt+=vertical
 
 " FZF search
 nnoremap <C-p> :GFiles<Cr>
