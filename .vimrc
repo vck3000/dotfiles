@@ -170,7 +170,7 @@ nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>rr <Plug>(coc-rename)
 nmap <leader>gN <Plug>(coc-diagnostic-prev)
-nmap <leader>gc <Plug>(coc-git-chunkinfo)
+nmap <leader>gs <Plug>(coc-git-chunkinfo)
 nmap <leader>gn <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
@@ -207,12 +207,6 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Vim-fugitive
-nmap <leader>gs :G<CR>
-nmap <leader>gf :diffget //2<CR>
-nmap <leader>gj :diffget //3<CR>
-" Vertical split for gdiff
-set diffopt+=vertical
 
 " FZF search
 nnoremap <C-p> :GFiles<Cr>
