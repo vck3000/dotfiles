@@ -161,9 +161,9 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 # begin devforge completion
-. <(devforge --completion)
+# . <(devforge --completion)
 # end devforge completion
 
 # begin forge completion
-. <(forge --completion)
+# . <(forge --completion)
 # end forge completion
