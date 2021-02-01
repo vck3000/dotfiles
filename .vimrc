@@ -32,6 +32,7 @@ set updatetime=300
 call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox' " Color scheme
+Plug 'sainnhe/sonokai'
 Plug 'jremmen/vim-ripgrep' " Fast vim grepping 
 Plug 'tpope/vim-fugitive' " For git integration - blames, diffs, logs...
 Plug 'vim-utils/vim-man' " See man pages from within vim
@@ -44,6 +45,7 @@ Plug 'mbbill/undotree' " Undo tree...
 Plug 'tpope/vim-commentary' " Easy comments
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
+Plug 'kana/vim-submode' " submodes for resizing
 
 " Markdown
 Plug 'godlygeek/tabular'
@@ -69,6 +71,7 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-repeat'
 
 " ThePrimeagen
 Plug 'ThePrimeagen/vim-be-good'
@@ -106,9 +109,10 @@ let g:airline_powerline_fonts = 1
 
 " Colour schemes
 set background=dark
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme sonokai
 " Set transparent background
-autocmd VimEnter * hi Normal ctermbg=none
+" autocmd VimEnter * hi Normal ctermbg=none
 
 " Tmux colours
 set t_Co=256
@@ -154,9 +158,26 @@ nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>w :w<CR>
 " Get up ripgrep ready to Project Search
 nnoremap <leader>ps :Rg<SPACE>
-nnoremap <silent> <Leader>= :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
-" Inverse relative line number on ctrl + l twice.
+" nnoremap <silent> <Leader>= :vertical resize +5<CR>
+" nnoremap <silent> <Leader>- :vertical resize -5<CR>
+call submode#enter_with('grow/shrink', 'n', '', '<leader>J', '<C-w>+')
+call submode#enter_with('grow/shrink', 'n', '', '<leader>K', '<C-w>-')
+call submode#map('grow/shrink', 'n', '', 'J', '<C-w>+')
+call submode#map('grow/shrink', 'n', '', 'j', '<C-w>+')
+call submode#map('grow/shrink', 'n', '', 'K', '<C-w>-')
+call submode#map('grow/shrink', 'n', '', 'k', '<C-w>-')
+
+call submode#enter_with('grow/shrink', 'n', '', '<leader>L', '<C-w>>')
+call submode#enter_with('grow/shrink', 'n', '', '<leader>H', '<C-w><')
+call submode#map('grow/shrink', 'n', '', 'L', '<C-w>>')
+call submode#map('grow/shrink', 'n', '', 'l', '<C-w>>')
+call submode#map('grow/shrink', 'n', '', 'H', '<C-w><')
+call submode#map('grow/shrink', 'n', '', 'h', '<C-w><')
+
+" don't consume submode-leaving key
+let g:submode_keep_leaving_key = 1
+
+"Inverse relative line number on ctrl + l twice.
 nmap <C-L><C-L> :set invrelativenumber<CR>
 
 
