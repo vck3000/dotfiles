@@ -10,7 +10,6 @@ else
   export ZSH="/Users/vkuo/.oh-my-zsh"
 fi
 
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -160,13 +159,16 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
-# begin devforge completion
-# . <(devforge --completion)
-# end devforge completion
+if [ "$OS" = "Linux" ]; then
+else
+  # begin devforge completion
+  # . <(devforge --completion)
+  # end devforge completion
 
-# begin forge completion
-# . <(forge --completion)
-# end forge completion
+  # begin forge completion
+  # . <(forge --completion)
+  # end forge completion
+fi
 
 export PATH="/home/victor/.local/bin:"$PATH
 
