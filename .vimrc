@@ -48,6 +48,7 @@ Plug 'ryanoasis/vim-devicons'
 " Markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown' " Markdown syntax
+
 Plug 'junegunn/limelight.vim' " Dims inactive paragraphs
 Plug 'junegunn/goyo.vim' " Distraction free writing
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -245,3 +246,11 @@ nmap <leader>p :setlocal paste! paste?<cr>
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
 
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+	augroup WSLYank
+		autocmd!
+		autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+	augroup END
+endif

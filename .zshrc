@@ -167,3 +167,6 @@ load-nvmrc
 # begin forge completion
 # . <(forge --completion)
 # end forge completion
+
+export PATH="/home/victor/.local/bin:"$PATH
+
