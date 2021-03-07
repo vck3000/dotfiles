@@ -275,3 +275,6 @@ if executable(s:clip)
 		autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
 	augroup END
 endif
+
+" Start up v5 warning
+let g:coc_disable_startup_warning = 1
