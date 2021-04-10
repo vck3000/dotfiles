@@ -4,8 +4,10 @@
 # Path to your oh-my-zsh installation.
 OS=$(uname -s)
 
-if [ "$OS" = "Linux" ]; then
+if [ "$OS" = "Linux" ] && [ "$USER" = "victor" ]; then
   export ZSH="/home/victor/.oh-my-zsh"
+elif [ "$OS" = "Linux" ] && [ "$USER" = "pi" ]; then
+  export ZSH="/home/pi/.oh-my-zsh"
 else
   export ZSH="/Users/vkuo/.oh-my-zsh"
 fi
@@ -172,7 +174,7 @@ fi
 
 export PATH="/home/victor/.local/bin:"$PATH
 
+# Laptop
 alias vs="cd /mnt/c/VictorsStuff"
 # For vcxsrv WSL2 python gui to show
 export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
-

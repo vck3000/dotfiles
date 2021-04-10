@@ -286,7 +286,6 @@ if executable(s:clip)
 	augroup END
 endif
 
-
 " Svelte context filetype so commenting works correctly
 if !exists('g:context_filetype#same_filetypes')
   let g:context_filetype#filetypes = {}
@@ -304,3 +303,6 @@ let g:context_filetype#filetypes.svelte =
 \ ]
 
 let g:ft = ''
+
+" Start up v5 warning
+let g:coc_disable_startup_warning = 1
