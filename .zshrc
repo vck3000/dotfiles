@@ -172,3 +172,7 @@ fi
 
 export PATH="/home/victor/.local/bin:"$PATH
 
+alias vs="cd /mnt/c/VictorsStuff"
+# For vcxsrv WSL2 python gui to show
+export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+
