@@ -67,6 +67,11 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'alvan/vim-closetag'
 
+" Svelte
+Plug 'evanleck/vim-svelte'
+" Svelte context filetype so commenting works
+Plug 'Shougo/context_filetype.vim'
+
 " Quality of life
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
@@ -82,6 +87,9 @@ Plug 'octol/vim-cpp-enhanced-highlight' " Syntax highlighting
 
 " Flutter related stuff
 Plug 'dart-lang/dart-vim-plugin'
+
+" CSV files
+Plug 'mechatroner/rainbow_csv'
 
 call plug#end()
 
@@ -188,6 +196,8 @@ nnoremap <leader>c :noh<CR>
 " Yank to clipboard
 noremap <leader>y "+y
 
+noremap <leader>e :noa w<CR>
+
 " coc.nvim remaps
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
@@ -275,3 +285,22 @@ if executable(s:clip)
 		autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
 	augroup END
 endif
+
+
+" Svelte context filetype so commenting works correctly
+if !exists('g:context_filetype#same_filetypes')
+  let g:context_filetype#filetypes = {}
+endif
+
+let g:context_filetype#filetypes.svelte =
+\ [
+\   {'filetype' : 'javascript', 'start' : '<script>', 'end' : '</script>'},
+\   {
+\     'filetype': 'typescript',
+\     'start': '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
+\     'end': '',
+\   },
+\   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
+\ ]
+
+let g:ft = ''
