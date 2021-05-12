@@ -82,6 +82,9 @@ Plug 'octol/vim-cpp-enhanced-highlight' " Syntax highlighting
 " Flutter related stuff
 Plug 'dart-lang/dart-vim-plugin'
 
+" Latex
+Plug 'lervag/vimtex'
+
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -106,6 +109,11 @@ let g:clang_format#style_options = {
 
 " vim-airline stuff
 let g:airline_powerline_fonts = 1
+
+" vimtex pdf viewer
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_options_latexmk = '--unique'
 
 " Colour schemes
 set background=dark
@@ -185,7 +193,13 @@ nmap <C-L><C-L> :set invrelativenumber<CR>
 nnoremap <leader>c :noh<CR>
 
 " Yank to clipboard
-noremap <leader>y "+y
+nnoremap <leader>y "+y
+
+" Save file without formatting
+nnoremap <leader>e :noa w<CR>
+
+" List buffers
+nnoremap <leader>b :Buffers<CR>
 
 " coc.nvim remaps
 nmap <leader>gd <Plug>(coc-definition)
