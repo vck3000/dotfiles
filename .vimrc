@@ -50,6 +50,7 @@ Plug 'kana/vim-submode' " submodes for resizing
 " Markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown' " Markdown syntax
+
 Plug 'junegunn/limelight.vim' " Dims inactive paragraphs
 Plug 'junegunn/goyo.vim' " Distraction free writing
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -65,6 +66,11 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'alvan/vim-closetag'
+
+" Svelte
+Plug 'evanleck/vim-svelte'
+" Svelte context filetype so commenting works
+Plug 'Shougo/context_filetype.vim'
 
 " Quality of life
 Plug 'tpope/vim-surround'
@@ -84,6 +90,9 @@ Plug 'dart-lang/dart-vim-plugin'
 
 " Latex
 Plug 'lervag/vimtex'
+
+" CSV files
+Plug 'mechatroner/rainbow_csv'
 
 call plug#end()
 
@@ -201,6 +210,8 @@ nnoremap <leader>e :noa w<CR>
 " List buffers
 nnoremap <leader>b :Buffers<CR>
 
+noremap <leader>e :noa w<CR>
+
 " coc.nvim remaps
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
@@ -280,3 +291,32 @@ nmap <leader>p :setlocal paste! paste?<cr>
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
 
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+	augroup WSLYank
+		autocmd!
+		autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+	augroup END
+endif
+
+" Svelte context filetype so commenting works correctly
+if !exists('g:context_filetype#same_filetypes')
+  let g:context_filetype#filetypes = {}
+endif
+
+let g:context_filetype#filetypes.svelte =
+\ [
+\   {'filetype' : 'javascript', 'start' : '<script>', 'end' : '</script>'},
+\   {
+\     'filetype': 'typescript',
+\     'start': '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
+\     'end': '',
+\   },
+\   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
+\ ]
+
+let g:ft = ''
+
+" Start up v5 warning
+let g:coc_disable_startup_warning = 1
