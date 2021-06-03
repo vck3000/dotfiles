@@ -15,14 +15,13 @@ set undodir=~/.vim/undodir " Keep track of changes in a specific folder
 set undofile " Tell vim to keep track of a separate undo file for each file
 set incsearch " Incremental search
 set showcmd " Show what command is being typed out
-set relativenumber
+" set relativenumber
 set hls "highlight search terms
 set encoding=utf8
 set hidden
 set scrolloff=8
 set sidescrolloff=16
 set completeopt=menuone,noinsert,noselect
-
 
 set cmdheight=2
 set laststatus=2
@@ -163,7 +162,10 @@ let g:netrw_browse_split = 4
 autocmd FileType markdown normal zR 
 autocmd FileType markdown :set wrap
 autocmd FileType markdown :set linebreak
-" autocmd FileType markdown match OverLength /\%9999v.\+/ " Don't show in md files
+
+" Tex
+autocmd FileType tex :set wrap
+autocmd FileType tex :set linebreak
 
 " Remaps
 " Jump between windows easily
@@ -172,11 +174,18 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
+
 nnoremap <leader>w :w<CR>
+" Save file without formatting
+nnoremap <leader>e :noa w<CR>
+
 " Get up ripgrep ready to Project Search
 nnoremap <leader>ps :Rg<SPACE>
-" nnoremap <silent> <Leader>= :vertical resize +5<CR>
-" nnoremap <silent> <Leader>- :vertical resize -5<CR>
+
+" Remap j and k to go visual lines instead of whole lines
+noremap k gk
+noremap j gj
+
 call submode#enter_with('grow/shrink', 'n', '', '<leader>J', '<C-w>+')
 call submode#enter_with('grow/shrink', 'n', '', '<leader>K', '<C-w>-')
 call submode#map('grow/shrink', 'n', '', 'J', '<C-w>+')
@@ -194,23 +203,14 @@ call submode#map('grow/shrink', 'n', '', 'h', '<C-w><')
 " don't consume submode-leaving key
 let g:submode_keep_leaving_key = 1
 
-"Inverse relative line number on ctrl + l twice.
-nmap <C-L><C-L> :set invrelativenumber<CR>
-
-
 " Clear highlighting words after search
 nnoremap <leader>c :noh<CR>
 
 " Yank to clipboard
-nnoremap <leader>y "+y
-
-" Save file without formatting
-nnoremap <leader>e :noa w<CR>
+noremap <leader>y "+y
 
 " List buffers
 nnoremap <leader>b :Buffers<CR>
-
-noremap <leader>e :noa w<CR>
 
 " coc.nvim remaps
 nmap <leader>gd <Plug>(coc-definition)
@@ -223,7 +223,6 @@ nmap <leader>gc <Plug>(coc-git-chunkinfo)
 nmap <leader>gn <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <leader>cr :CocRestart<CR>
 " remap to prevent floating windows on C-c
 inoremap <C-c> <Esc><Esc>
 " Use <c-space> to trigger completion.
@@ -271,7 +270,6 @@ nmap <leader>gj :diffget //3<CR>
 nmap <leader>gh :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
-
 " FZF search
 nnoremap <C-p> :GFiles<Cr>
 nnoremap <leader>o :Files<Cr>
@@ -285,7 +283,7 @@ nnoremap <leader>pf :NERDTreeFind<CR>
 
 
 " leader p to set into paste mode
-nmap <leader>p :setlocal paste! paste?<cr>
+nmap <leader>pa :setlocal paste! paste?<cr>
 
 " closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx'
