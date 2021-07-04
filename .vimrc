@@ -162,10 +162,12 @@ let g:netrw_browse_split = 4
 autocmd FileType markdown normal zR 
 autocmd FileType markdown :set wrap
 autocmd FileType markdown :set linebreak
+autocmd FileType tex :set spell
 
 " Tex
 autocmd FileType tex :set wrap
 autocmd FileType tex :set linebreak
+autocmd FileType tex :set spell
 
 " Remaps
 " Jump between windows easily
@@ -202,6 +204,9 @@ call submode#map('grow/shrink', 'n', '', 'h', '<C-w><')
 
 " don't consume submode-leaving key
 let g:submode_keep_leaving_key = 1
+
+"Inverse relative line number on ctrl + l twice.
+nmap <C-L><C-L> :set invrelativenumber<CR>
 
 " Clear highlighting words after search
 nnoremap <leader>c :noh<CR>
@@ -318,3 +323,4 @@ let g:ft = ''
 
 " Start up v5 warning
 let g:coc_disable_startup_warning = 1
+
