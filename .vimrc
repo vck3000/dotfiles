@@ -15,7 +15,7 @@ set undodir=~/.vim/undodir " Keep track of changes in a specific folder
 set undofile " Tell vim to keep track of a separate undo file for each file
 set incsearch " Incremental search
 set showcmd " Show what command is being typed out
-" set relativenumber
+set relativenumber
 set hls "highlight search terms
 set encoding=utf8
 set hidden
