@@ -6,10 +6,17 @@ OS=$(uname -s)
 
 if [ "$OS" = "Linux" ] && [ "$USER" = "victor" ]; then
   export ZSH="/home/victor/.oh-my-zsh"
+  export PATH="/home/victor/.local/bin:"$PATH
+
 elif [ "$OS" = "Linux" ] && [ "$USER" = "pi" ]; then
   export ZSH="/home/pi/.oh-my-zsh"
+
 else
-  export ZSH="/Users/vkuo/.oh-my-zsh"
+  export ZSH="/Users/kuo.victor/.oh-my-zsh"
+
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
 # Set name of the theme to load --- if set to "random", it will
@@ -128,56 +135,8 @@ export NVM_DIR="$HOME/.nvm"
 alias gs="git status"
 alias gdc="git diff --cached"
 
-export FORGE_CLI_PATH=~/Coding/forge
-# export FORGE_CLI_PATH=~/forge
-# alias devforge='FORGE_DEV_TUNNEL=true PATH=$FORGE_CLI_PATH/scripts:$PATH node $FORGE_CLI_PATH/packages/forge-cli/out/bin/cli.js'
-devforge() {AUTOCOMPLETE_ALIAS=devforge FORGE_DEV_TUNNEL=true PATH=$FORGE_CLI_PATH/scripts:$PATH node $FORGE_CLI_PATH/packages/forge-cli/out/bin/cli.js $@ }
-# _devforge_completion() {FORGE_DEV_TUNNEL=true PATH=$FORGE_CLI_PATH/scripts:$PATH node $FORGE_CLI_PATH/packages/forge-cli/out/bin/cli.js $@ }
-
-alias devforgedocker='FORGE_DEV_DOCKER_TUNNEL=true PATH=$FORGE_CLI_PATH/scripts:$PATH node $FORGE_CLI_PATH/packages/forge-cli/out/bin/cli.js'
-
-export LOCAL_CLI_EXECUTABLE=~/Coding/forge/packages/forge-cli/out/bin/cli.js
-
-# Automatically run `nvm use` when in a directory with it.
-# place this after nvm initialization!
-# autoload -U add-zsh-hook
-# load-nvmrc() {
-#   local node_version="$(nvm version)"
-#   local nvmrc_path="$(nvm_find_nvmrc)"
-
-#   if [ -n "$nvmrc_path" ]; then
-#     local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-#     if [ "$nvmrc_node_version" = "N/A" ]; then
-#       nvm install
-#     elif [ "$nvmrc_node_version" != "$node_version" ]; then
-#       nvm use
-#     fi
-#   elif [ "$node_version" != "$(nvm version default)" ]; then
-#     echo "Reverting to nvm default version"
-#     nvm use default
-#   fi
-# }
-# add-zsh-hook chpwd load-nvmrc
-# load-nvmrc
-
-if [ "$OS" = "Linux" ]; then
-else
-  # begin devforge completion
-  # . <(devforge --completion)
-  # end devforge completion
-
-  # begin forge completion
-  # . <(forge --completion)
-  # end forge completion
-fi
-
-export PATH="/home/victor/.local/bin:"$PATH
-
 # Laptop
 alias vs="cd /mnt/c/VictorsStuff"
-# For vcxsrv WSL2 python gui to show
-# export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
 
-alias do="docker"
+alias doc="docker"
 alias dc="docker-compose"
