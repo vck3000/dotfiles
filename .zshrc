@@ -17,6 +17,9 @@ else
   export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+  # Accenture
+  alias kubeauth='$(kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | tr -s " " | cut -d" " -f1) | pcregrep -o1 "token:\s+(.*)" | pbcopy)'
 fi
 
 # Set name of the theme to load --- if set to "random", it will
@@ -135,8 +138,5 @@ export NVM_DIR="$HOME/.nvm"
 alias gs="git status"
 alias gdc="git diff --cached"
 
-# Laptop
-alias vs="cd /mnt/c/VictorsStuff"
-
 alias doc="docker"
-alias dc="docker-compose"
+alias dcc="docker-compose"
