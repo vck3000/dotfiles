@@ -93,6 +93,9 @@ Plug 'lervag/vimtex'
 " CSV files
 Plug 'mechatroner/rainbow_csv'
 
+" Helm files
+Plug 'towolf/vim-helm'
+
 call plug#end()
 
 let g:coc_global_extensions = [
