@@ -14,6 +14,7 @@ elif [ "$OS" = "Linux" ] && [ "$USER" = "pi" ]; then
 
 else
   export ZSH="/Users/kuo.victor/.oh-my-zsh"
+  export PATH="/Users/kuo.victor/Library/Python/3.9/bin:"$PATH
 
   export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
@@ -21,6 +22,10 @@ else
 
   # Accenture
   alias kubeauth='$(kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | tr -s " " | cut -d" " -f1) | pcregrep -o1 "token:\s+(.*)" | pbcopy)'
+  export KUBE_EDITOR="nvim"
+
+  export PATH="/Users/kuo.victor/go/bin:"$PATH
+  export PATH=$PATH:~/.kube/plugins/jordanwilson230
 fi
 
 

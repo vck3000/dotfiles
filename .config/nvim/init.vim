@@ -27,6 +27,8 @@ set cmdheight=2
 set laststatus=2
 set updatetime=300
 
+autocmd VimEnter * :highlight LineNr ctermfg=grey
+
 " Plugins
 call plug#begin('~/.vim/plugged')
 
@@ -97,6 +99,12 @@ Plug 'mechatroner/rainbow_csv'
 " Helm files
 Plug 'towolf/vim-helm'
 
+" Jenkinsfile
+Plug 'martinda/Jenkinsfile-vim-syntax'
+
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -110,6 +118,7 @@ let g:coc_global_extensions = [
 \ 'coc-prettier',
 \ 'coc-tsserver',
 \ 'coc-yaml',
+\ 'coc-go',
 \ ]
 
 " Clangd auto format on save for cpp files
@@ -123,9 +132,15 @@ let g:clang_format#style_options = {
 let g:airline_powerline_fonts = 1
 
 " vimtex pdf viewer
-let g:vimtex_view_general_viewer = 'okular'
-let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-let g:vimtex_view_general_options_latexmk = '--unique'
+if has('unix')
+  if has('mac')
+    let g:vimtex_view_method = 'skim'
+  else
+    let g:vimtex_view_general_viewer = 'okular'
+    let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+    let g:vimtex_view_general_options_latexmk = '--unique'
+  endif
+endif
 
 " Colour schemes
 set background=dark
@@ -189,8 +204,8 @@ nnoremap <leader>e :noa w<CR>
 nnoremap <leader>ps :Rg<SPACE>
 
 " Remap j and k to go visual lines instead of whole lines
-noremap k gk
-noremap j gj
+" noremap k gk
+" noremap j gj
 
 call submode#enter_with('grow/shrink', 'n', '', '<leader>J', '<C-w>+')
 call submode#enter_with('grow/shrink', 'n', '', '<leader>K', '<C-w>-')
@@ -328,3 +343,19 @@ let g:ft = ''
 " Start up v5 warning
 let g:coc_disable_startup_warning = 1
 
+
+" For vimtex to know the nvr address
+function! SetServerName()
+  if has('win32')
+    let nvim_server_file = $TEMP . "/curnvimserver.txt"
+  else
+    let nvim_server_file = "/tmp/curnvimserver.txt"
+  endif
+  let cmd = printf("echo %s > %s", v:servername, nvim_server_file)
+  call system(cmd)
+endfunction
+
+augroup vimtex_common
+    autocmd!
+    autocmd FileType tex call SetServerName()
+augroup END
