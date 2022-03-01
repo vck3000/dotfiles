@@ -7,6 +7,7 @@ OS=$(uname -s)
 if [ "$OS" = "Linux" ] && [ "$USER" = "victor" ]; then
   export ZSH="/home/victor/.oh-my-zsh"
   export PATH="/home/victor/.local/bin:"$PATH
+  export PATH="/usr/local/go/bin:"$PATH
 
 elif [ "$OS" = "Linux" ] && [ "$USER" = "pi" ]; then
   export ZSH="/home/pi/.oh-my-zsh"
@@ -21,6 +22,7 @@ else
   # Accenture
   alias kubeauth='$(kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | tr -s " " | cut -d" " -f1) | pcregrep -o1 "token:\s+(.*)" | pbcopy)'
 fi
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
