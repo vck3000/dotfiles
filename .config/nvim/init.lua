@@ -38,3 +38,4 @@ require('plugins')
 -- TODO map leader d to delete buffer
 -- TODO Vim peekaboo - see registers
 
+-- Telescope is stacked!!! Look at showcase.

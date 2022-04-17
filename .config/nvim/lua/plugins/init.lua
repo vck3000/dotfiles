@@ -63,6 +63,7 @@ return require('packer').startup(function()
   use 'psliwka/vim-smoothie'
   use 'ThePrimeagen/vim-be-good'
 
+  -- Navigation
   use {
     'kyazdani42/nvim-tree.lua',
     requires = { 'kyazdani42/nvim-web-devicons' },
@@ -70,6 +71,17 @@ return require('packer').startup(function()
       require('plugins.nvim-tree')
     end
   }
+
+  use({
+    'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('plugins.telescope')
+    end,
+  })
+
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
 
   -- Treesitter helps with syntax highlighting
   -- Also helps neovim identify which sections of code are "foldable" for smart folding.
@@ -88,6 +100,10 @@ return require('packer').startup(function()
       require('lualine').setup()
     end
   }
+
+
+
+
 
   use {
     'lewis6991/gitsigns.nvim',
