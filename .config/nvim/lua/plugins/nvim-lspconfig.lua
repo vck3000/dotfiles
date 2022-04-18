@@ -38,10 +38,14 @@ lsp_installer.settings({ log_level = vim.log.levels.DEBUG })
 --   server:setup({ on_attach = on_attach })
 -- end)
 
+-- Capabilities of cmp auto completion
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 -- Careful not to require lspconfig setup stuff that nvim lsp installer already configures above^
 local servers = { 'tsserver', 'ccls' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
-    on_attach = on_attach
+    on_attach = on_attach,
+    capabilities = capabilities
   }
 end
