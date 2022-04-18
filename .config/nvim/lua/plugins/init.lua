@@ -26,15 +26,6 @@ return require('packer').startup(function()
     end
   }
 
-  use 'jremmen/vim-ripgrep' -- Fast vim grepping 
-    -- TODO
-    -- FZF search
-    -- nnoremap <C-p> :GFiles<Cr>
-    -- nnoremap <leader>o :Files<Cr>
-
-
-  use 'tpope/vim-commentary' -- Easy comments
-  use 'kana/vim-submode' -- submodes for resizing
     -- call submode#enter_with('grow/shrink', 'n', '', '<leader>J', '<C-w>+')
     -- call submode#enter_with('grow/shrink', 'n', '', '<leader>K', '<C-w>-')
     -- call submode#map('grow/shrink', 'n', '', 'J', '<C-w>+')
@@ -52,16 +43,27 @@ return require('packer').startup(function()
     -- don't consume submode-leaving key
     -- let g:submode_keep_leaving_key = 1
 
-
-  use 'junegunn/goyo.vim' -- Distraction free writing
-
   -- Quality of life
+  use 'tpope/vim-commentary' -- Easy comments
   use 'tpope/vim-surround'
-  use 'jiangmiao/auto-pairs'
-  use 'alvan/vim-closetag'
   use 'tpope/vim-repeat'
+  use 'kana/vim-submode' -- submodes for resizing
+  use 'junegunn/goyo.vim' -- Distraction free writing
+  use {
+    'junegunn/vim-easy-align',
+    config = function() 
+      -- vim.api.nvim_set_keymap('n', 'ga',':EasyAlign<CR>', { noremap = true })
+      -- vim.api.nvim_set_keymap('x', 'ga',':EasyAlign<CR>', { noremap = true })
+
+      vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', { noremap = true })
+      vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', { noremap = true })
+      vim.api.nvim_set_keymap('v', '<leader><bslash>', ':EasyAlign*<bar><CR>', { noremap = true })
+    end
+  }
+  use 'jiangmiao/auto-pairs'
   use 'psliwka/vim-smoothie'
   use 'ThePrimeagen/vim-be-good'
+  use 'lukas-reineke/indent-blankline.nvim'
 
   -- Navigation
   use {
@@ -79,9 +81,7 @@ return require('packer').startup(function()
       require('plugins.telescope')
     end,
   })
-
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-
 
   -- Treesitter helps with syntax highlighting
   -- Also helps neovim identify which sections of code are "foldable" for smart folding.
@@ -101,10 +101,6 @@ return require('packer').startup(function()
     end
   }
 
-
-
-
-
   use {
     'lewis6991/gitsigns.nvim',
     config = function () 
@@ -117,21 +113,25 @@ return require('packer').startup(function()
     -- tag = 'release' -- To use the latest release
   }
 
+
+  -- LSP and completion
+  use({
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('plugins.nvim-lspconfig')
+    end,
+  })
+
+  use 'williamboman/nvim-lsp-installer'
+
 -- use 'morhetz/gruvbox' -- Color scheme
 -- use 'tpope/vim-fugitive' -- For git integration - blames, diffs, logs...
 -- use 'vim-utils/vim-man' -- See man pages from within vim
 -- use 'junegunn/limelight.vim' -- Dims inactive paragraphs
 
--- use 'junegunn/fzf', { 'do': { -> fzf#install() } } -- fuzzy find 
--- use 'junegunn/fzf.vim'
-
--- use 'neoclide/coc.nvim', {'branch': 'release'}
-
 -- use 'mbbill/undotree' -- Undo tree...
--- use 'ryanoasis/vim-devicons' -- For use with other plugins like nerdtree
 
 -- Markdown
--- use 'godlygeek/tabular' -- https://github.com/junegunn/vim-easy-align
 -- use 'plasticboy/vim-markdown' -- Markdown syntax
 -- use 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 -- let g:mkdp_markdown_css = expand('~/.vim/github-markdown.css')

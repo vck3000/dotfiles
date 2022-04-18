@@ -21,7 +21,7 @@ vim.opt.encoding = 'utf8'
 vim.opt.hidden = true                   -- TODO Look into this
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 16
-vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
+-- vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
 
 vim.opt.smartindent = true              -- Try to indent for me
 
