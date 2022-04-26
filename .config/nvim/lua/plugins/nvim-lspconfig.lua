@@ -42,7 +42,7 @@ lsp_installer.settings({ log_level = vim.log.levels.DEBUG })
 local capabilities = {}
 
 local exists, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if(exists) then
+if exists then
   print("cmp_nvim_lsp detected. Adding capabilities.")
   capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 end
