@@ -39,7 +39,13 @@ lsp_installer.settings({ log_level = vim.log.levels.DEBUG })
 -- end)
 
 -- Capabilities of cmp auto completion
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = {}
+
+local exists, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if(exists) then
+  print("cmp_nvim_lsp detected. Adding capabilities.")
+  capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+end
 
 -- Careful not to require lspconfig setup stuff that nvim lsp installer already configures above^
 local servers = { 'tsserver', 'ccls', 'pyright' }
