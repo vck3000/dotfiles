@@ -23,7 +23,7 @@ require('nvim-treesitter.configs').setup({
     "latex",
     "llvm",
     "lua",
-    "makee",
+    "make",
     "markdown",
     "ninja",
     "perl",
