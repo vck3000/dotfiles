@@ -15,6 +15,7 @@ OS=$(uname -s)
 if [ "$OS" = "Linux" ] && [ "$USER" = "victor" ]; then
   export PATH="/home/victor/.local/bin:"$PATH
   export PATH="/usr/local/go/bin:"$PATH
+  export PATH="/home/victor/.cargo/bin:"$PATH
 fi
 
 
@@ -128,10 +129,10 @@ source $ZSH/oh-my-zsh.sh
 # For zsh-autosuggestions to accept suggestion on ctrl + space
 bindkey '^ ' autosuggest-accept
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm use --lts
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# nvm use --lts
 
 # Custom aliases
 alias gs="git status"
