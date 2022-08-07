@@ -1,8 +1,9 @@
-vim.g.mapleader = ' '
+require("settings")
+require("mappings")
+require("plugins")
 
-require('settings')
-require('mappings')
-require('plugins')
+require("cmp_")
+require("lsp")
 
 -- Set transparent background
 -- autocmd VimEnter * hi Normal ctermbg=none
